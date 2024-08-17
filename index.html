@@ -215,6 +215,64 @@
           color: #ffcc00;
          } 
 
+        
+        /* Floating Button Styles */
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #003366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .floating-button i {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        /* Dismiss Button Styles */
+        .dismiss-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff6666;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        .dismiss-btn:hover {
+            background-color: #ff3333;
+        }
+
+        /* Hide the button when dismissed */
+        .hidden {
+            display: none;
+        }
+
         /* Footer Styling */
         footer {
             background-color: #003366;
