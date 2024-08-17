@@ -477,6 +477,17 @@
         </section>
     </main>
 
+
+       <!-- Floating Button -->
+    <div class="floating-button" id="joinGroupsButton">
+        <i class="fas fa-users"></i> Join Our Groups
+        <button class="dismiss-btn" id="dismissButton">&times;</button>
+    </div>
+
+
+
+
+    
     <!-- Footer -->
     <footer>
 
@@ -550,5 +561,17 @@
             showSection('home');
         });
     </script>
+
+        <script>
+        // JavaScript to handle the dismiss button
+        document.getElementById('dismissButton').addEventListener('click', function() {
+            document.getElementById('joinGroupsButton').classList.add('hidden');
+        });
+
+        // Redirect to the group page when the floating button is clicked
+        document.getElementById('joinGroupsButton').addEventListener('click', function() {
+            window.location.href = 'group-page.html'; // Replace with the actual URL of your group page
+        });
+        </script>
 </body>
 </html>
