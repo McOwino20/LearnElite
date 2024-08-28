@@ -887,5 +887,38 @@
        </script>
 
 
+// Enable sliding effects 
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.querySelector('.slides');
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            slideIndex++;
+            if (slideIndex >= totalSlides) slideIndex = 0;
+
+            slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+
+        function prevSlide() {
+            const slides = document.querySelector('.slides');
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            slideIndex--;
+            if (slideIndex < 0) slideIndex = totalSlides - 1;
+
+            slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlides();
+        }
+
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+
+
+    
 </body>
 </html>
