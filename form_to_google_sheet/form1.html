@@ -74,5 +74,35 @@
             });
         });
     </script>
+
+
+<!--The below is a Google sheet Apps script-->
+
+
+    <!--
+    
+    function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = e.parameter;
+    var timestamp = new Date();
+    // Append the timestamp and form data to the sheet
+    sheet.appendRow([timestamp, data.name, data.email, data.message]);
+    
+    // Send success response
+    return ContentService.createTextOutput(JSON.stringify({status: 'success', message: 'Form submitted successfully'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    // Send error response
+    return ContentService.createTextOutput(JSON.stringify({status: 'error', message: 'Form submission failed'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+    
+-->
+    
+    
 </body>
 </html>
+
+
