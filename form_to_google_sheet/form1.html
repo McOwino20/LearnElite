@@ -1,27 +1,3 @@
-<!--
-
-function doPost(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = e.parameter;
-    var timestamp = new Date();
-    // Append the timestamp and form data to the sheet
-    sheet.appendRow([timestamp, data.name, data.email, data.message]);
-    
-    // Send success response
-    return ContentService.createTextOutput(JSON.stringify({status: 'success', message: 'Form submitted successfully'}))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch (error) {
-    // Send error response
-    return ContentService.createTextOutput(JSON.stringify({status: 'error', message: 'Form submission failed'}))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
--->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +48,7 @@ function doPost(e) {
             var responseMessage = document.getElementById('responseMessage');
 
             // Send data using AJAX
-            fetch("YOUR_WEB_APP_URL", {
+            fetch("https://script.google.com/macros/s/AKfycby6L3-gAf-j-pj0Rwu3L0rzIAM7SB8qMwmF2Hft4qNsb6lPlmxdl96vHZAgyADmwR3g/exec", {
                 method: "POST",
                 body: formData
             })
