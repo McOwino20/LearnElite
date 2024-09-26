@@ -119,7 +119,7 @@
         <div class="contact-box">
             
                 <center><h2>Contact Us</h2></center>
-                <form name="Google-sheet-as-a-contact-form">
+                <form name="submit-to-google-sheet">
                     <input type="text" class="field" placeholder="name" name="name" required>
                     <input type="text" class="field" placeholder="email" name="email" required>
                     <input type="text" class="field" placeholder="subject" id="sub" name ="subject" required>
@@ -147,7 +147,7 @@
     <!--index.html-https://script.google.com/macros/s/AKfycbyuv0GHPOjqO7yqWEsQ2KP7RDGW2W7P6as2MrLHpWaW8PDzRn4IURgFEIfrh3oDJBu3Bw/exec-->
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzphs-uiJdfyCeEg8NRHDTBmhtttefMFBQ0qxpO-go76qhZ3yunQF_cYuocGWkMqBDcaQ/exec'
-        const form = document.forms['Google-sheet-as-a-contact-form'];
+        const form = document.forms['submit-to-google-sheet'];
         const successmsg=document.getElementById('successmsg');
         const errormsg=document.getElementById('errormsg');
         form.addEventListener('submit', e => {
