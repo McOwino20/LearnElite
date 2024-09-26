@@ -81,6 +81,61 @@
 <!--
 
 
+Modify the Google Apps Script to Allow Editing
+
+
+
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = e.parameter;
+
+    var name = data.name;
+    var email = data.email;
+    var message = data.message;
+
+    // Get all the data from the sheet starting from row 2 (row 1 is header)
+    var existingData = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues(); // All columns A to D (Timestamp, Name, Email, Message)
+
+    // Find the row index if a duplicate entry exists (matching name, email, and message)
+    var rowIndex = existingData.findIndex(function(row) {
+      return row[1] === name && row[2] === email; // Check if name and email match
+    });
+
+    if (rowIndex !== -1) {
+      // If duplicate exists, update the existing row with the new data
+      var actualRow = rowIndex + 2; // Adjust for zero-based index and header row
+
+      sheet.getRange(actualRow, 1).setValue(new Date()); // Update timestamp
+      sheet.getRange(actualRow, 2).setValue(name);        // Update name
+      sheet.getRange(actualRow, 3).setValue(email);       // Update email
+      sheet.getRange(actualRow, 4).setValue(message);     // Update message
+
+      // Send response for an updated entry
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'success',
+        message: 'Duplicate entry found. Data has been updated successfully.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // If no duplicate exists, append the new row
+    var timestamp = new Date();
+    sheet.appendRow([timestamp, name, email, message]);
+
+    // Send success response for new entry
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      message: 'Form submitted successfully.'
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    // Send error response in case of failure
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: 'Form submission failed.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
 
 
 
