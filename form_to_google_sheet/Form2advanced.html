@@ -82,6 +82,52 @@
 <!--
     
 
+Google Apps Script to prevent duplicates based on all the fields:
+
+    
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = e.parameter;
+    
+    var name = data.name;
+    var email = data.email;
+    var message = data.message;
+
+    // Get all the data from the sheet starting from row 2 (row 1 is header)
+    var existingData = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues(); // All columns A to D (Timestamp, Name, Email, Message)
+
+    // Check if there is an exact match for Name, Email, and Message
+    var duplicateExists = existingData.some(function(row) {
+      return row[1] === name && row[2] === email && row[3] === message; // Compare Name, Email, Message
+    });
+
+    if (duplicateExists) {
+      // Send error response if a duplicate is found
+      return ContentService.createTextOutput(JSON.stringify({
+        status: 'error',
+        message: 'Duplicate entry: The exact same name, email, and message have already been submitted.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // If no duplicate, append the new row
+    var timestamp = new Date();
+    sheet.appendRow([timestamp, name, email, message]);
+
+    // Send success response
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'success',
+      message: 'Form submitted successfully.'
+    })).setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    // Send error response in case of failure
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: 'Form submission failed.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
 
 
   
