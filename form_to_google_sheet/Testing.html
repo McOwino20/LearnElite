@@ -40,15 +40,15 @@
 
     </form>
 
-    <div id="responseMessage" class="message"></div>
+    <div id="response" class="message"></div>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('submissionForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Prevent form from submitting normally
 
             // Get form data
             var formData = new FormData(this);
-            var responseMessage = document.getElementById('responseMessage');
+            var responseMessage = document.getElementById('response');
 
             // Send data using AJAX
             fetch("https://script.google.com/macros/s/AKfycbxj6dJlJ2KIgcEVcZDEwC2GTyVVofIk1B96_frwbbrLF0UprXI30CQBCCmdAe89V-oC8g/exec", {
