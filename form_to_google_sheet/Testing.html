@@ -35,90 +35,47 @@
     </form>
   </div>
 
-  <script>
-    document.getElementById('submissionForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent the form from submitting the traditional way
-
-      var form = event.target;
-      var formData = new FormData(form);
-
-      fetch('https://script.google.com/macros/s/AKfycbxj6dJlJ2KIgcEVcZDEwC2GTyVVofIk1B96_frwbbrLF0UprXI30CQBCCmdAe89V-oC8g/exec', { // Replace with your script URL
-        method: 'POST',
-        body: new URLSearchParams(formData)
-      })
-      .then(response => response.json())
-      .then(data => {
-        var responseDiv = document.getElementById('response');
-        responseDiv.style.display = 'block';
-
-        if (data.status === 'success') {
-          responseDiv.textContent = data.message;
-          responseDiv.className = 'response success';
-          form.reset(); // Clear the form
-        } else if (data.status === 'duplicate') {
-          responseDiv.textContent = data.message;
-          responseDiv.className = 'response error';
-        } else {
-          responseDiv.textContent = 'An error occurred: ' + data.message;
-          responseDiv.className = 'response error';
-        }
-      })
-      .catch(error => {
-        var responseDiv = document.getElementById('response');
-        responseDiv.style.display = 'block';
-        responseDiv.textContent = 'An unexpected error occurred: ' + error.message;
-        responseDiv.className = 'response error';
-      });
-    });
-  </script>
 
 
 
-<!--Apps script 
+    </form>
 
-function doPost(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = e.parameter;
+    <div id="responseMessage" class="message"></div>
 
-    var name = data.name;
-    var email = data.email;
-    var message = data.message;
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form from submitting normally
 
-    // Get all the data from the sheet starting from row 2 (row 1 is header)
-    var existingData = sheet.getRange(2, 1, sheet.getLastRow() - 1, 3).getValues(); // Columns A to C (Name, Email, Message)
+            // Get form data
+            var formData = new FormData(this);
+            var responseMessage = document.getElementById('responseMessage');
 
-    // Check for duplicates (based on name and email)
-    for (var i = 0; i < existingData.length; i++) {
-      var row = existingData[i];
-      if (row[0] === name && row[1] === email) {
-        // Duplicate found, return error
-        return ContentService.createTextOutput(JSON.stringify({
-          status: 'duplicate',
-          message: 'Duplicate entry found. No new data added.'
-        })).setMimeType(ContentService.MimeType.JSON);
-      }
-    }
-
-    // If no duplicates, append the new row
-    var timestamp = new Date();
-    sheet.appendRow([name, email, message, timestamp]);
-
-    // Send success response
-    return ContentService.createTextOutput(JSON.stringify({
-      status: 'success',
-      message: 'Form submitted successfully!'
-    })).setMimeType(ContentService.MimeType.JSON);
-
-  } catch (error) {
-    // Send error response in case of failure
-    return ContentService.createTextOutput(JSON.stringify({
-      status: 'error',
-      message: 'Form submission failed. Please try again later.'
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
+            // Send data using AJAX
+            fetch("https://script.google.com/macros/s/AKfycby6L3-gAf-j-pj0Rwu3L0rzIAM7SB8qMwmF2Hft4qNsb6lPlmxdl96vHZAgyADmwR3g/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Display success message
+                    responseMessage.textContent = data.message;
+                    responseMessage.className = 'message success';
+                } else {
+                    // Display error message
+                    responseMessage.textContent = data.message;
+                    responseMessage.className = 'message error';
+                }
+                responseMessage.style.display = 'block';
+            })
+            .catch(error => {
+                // Display error message if there's an issue with the request
+                responseMessage.textContent = 'There was an error submitting the form.';
+                responseMessage.className = 'message error';
+                responseMessage.style.display = 'block';
+            });
+        });
+          </script>
       
   -->
 </body>
