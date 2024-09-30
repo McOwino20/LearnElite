@@ -1,79 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Form to Google Sheets</title>
-
-    <style>
-        /* Simple styling for the message */
-        .message {
-            display: none;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-        .message.success {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        .message.error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Submission</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    label { display: block; margin-top: 10px; }
+    input, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+    .response { margin-top: 20px; padding: 10px; border-radius: 5px; }
+    .response.success { background-color: #d4edda; color: #155724; }
+    .response.error { background-color: #f8d7da; color: #721c24; }
+  </style>
 </head>
 <body>
-    <h2>Contact Form</h2>
-    <form id="contactForm">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+  <div class="container">
+    <h1>Submit Your Details</h1>
+    <form id="submissionForm">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
 
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required>
 
-        <button type="submit">Submit</button>
+      <label for="message">Your Message:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Submit</button>
+
+      <div id="response" class="response" style="display: none;"></div>
     </form>
+  </div>
 
-    <div id="responseMessage" class="message"></div>
+  <script>
+    document.getElementById('submissionForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form from submitting normally
+      var form = event.target;
+      var formData = new FormData(form); // Collect the form data
+      
+      // Submit the form data to the Google Apps Script
+      fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', { // Replace YOUR_SCRIPT_ID with your actual script ID
+        method: 'POST',
+        body: new URLSearchParams(formData) // Convert form data to URL-encoded string
+      })
+      .then(response => response.json()) // Parse the JSON response
+      .then(data => {
+        var responseDiv = document.getElementById('response');
+        responseDiv.style.display = 'block';
 
-            // Get form data
-            var formData = new FormData(this);
-            var responseMessage = document.getElementById('responseMessage');
+        if (data.status === 'success') {
+          responseDiv.textContent = data.message;
+          responseDiv.className = 'response success';
+          form.reset(); // Clear the form upon successful submission
+        } else {
+          responseDiv.textContent = 'Error: ' + data.message;
+          responseDiv.className = 'response error';
+        }
+      })
+      .catch(error => {
+        var responseDiv = document.getElementById('response');
+        responseDiv.style.display = 'block';
+        responseDiv.textContent = 'Unexpected error: ' + error.message;
+        responseDiv.className = 'response error';
+      });
+    });
+  </script>
 
-            // Send data using AJAX
-            fetch("https://script.google.com/macros/s/AKfycbw4aCNP-1o_GTrcoHqXiYtsZ-FthQePsz0EyujaYQXxLlNV1zCNgVeCNFiFtIjyOUEF/exec", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Display success message
-                    responseMessage.textContent = data.message;
-                    responseMessage.className = 'message success';
-                } else {
-                    // Display error message
-                    responseMessage.textContent = data.message;
-                    responseMessage.className = 'message error';
-                }
-                responseMessage.style.display = 'block';
-            })
-            .catch(error => {
-                // Display error message if there's an issue with the request
-                responseMessage.textContent = 'There was an error submitting the form.';
-                responseMessage.className = 'message error';
-                responseMessage.style.display = 'block';
-            });
-        });
-    </script>
 
 
 <!--The below is a Google sheet Apps script-->
@@ -85,7 +81,8 @@
 Google Apps Script to prevent duplicates based on all the fields:
 
     
-function doPost(e) {
+
+function doPost(e) { 
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     var data = e.parameter;
@@ -94,20 +91,23 @@ function doPost(e) {
     var email = data.email;
     var message = data.message;
 
-    // Get all the data from the sheet starting from row 2 (row 1 is header)
-    var existingData = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues(); // All columns A to D (Timestamp, Name, Email, Message)
+    // Check if the sheet has any data beyond the header
+    if (sheet.getLastRow() > 1) {
+      // Get all the data from the sheet starting from row 2 (row 1 is header)
+      var existingData = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues(); // All columns A to D (Timestamp, Name, Email, Message)
 
-    // Check if there is an exact match for Name, Email, and Message
-    var duplicateExists = existingData.some(function(row) {
-      return row[1] === name && row[2] === email && row[3] === message; // Compare Name, Email, Message
-    });
+      // Check if there is an exact match for Name, Email, and Message
+      var duplicateExists = existingData.some(function(row) {
+        return row[1] === name && row[2] === email && row[3] === message; // Compare Name, Email, Message
+      });
 
-    if (duplicateExists) {
-      // Send error response if a duplicate is found
-      return ContentService.createTextOutput(JSON.stringify({
-        status: 'error',
-        message: 'Duplicate entry: The exact same name, email, and message have already been submitted.'
-      })).setMimeType(ContentService.MimeType.JSON);
+      if (duplicateExists) {
+        // Send error response if a duplicate is found
+        return ContentService.createTextOutput(JSON.stringify({
+          status: 'error',
+          message: 'Duplicate entry: The exact same name, email, and message have already been submitted.'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
     }
 
     // If no duplicate, append the new row
@@ -124,12 +124,10 @@ function doPost(e) {
     // Send error response in case of failure
     return ContentService.createTextOutput(JSON.stringify({
       status: 'error',
-      message: 'Form submission failed.'
+      message: 'Form submission failed: ' + error.message
     })).setMimeType(ContentService.MimeType.JSON);
   }
 }
-
-
   
     
 -->
