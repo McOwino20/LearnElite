@@ -45,15 +45,15 @@
 
       <!-- Hidden Fields -->
       <input type="hidden" id="formID" name="formID" value="FORM12345"> <!-- Example static form ID -->
-      <input type="hidden" id="submissionDate" name="submissionDate" value="currentDate"> <!-- Will be set with current date -->
-
-
-
-
-
-
-
+       <!-- Will be set with current date -->
       <input type="hidden" name="datetime_submitted" id="datetime_submitted">
+
+
+
+
+
+
+    
     
     <input type="hidden" name="location" id="location">
     
@@ -147,6 +147,13 @@
     </form>
   </div>
 
+
+  <div class="note">
+            Your country is detected automatically based on your IP address.
+     <p id="runningDate"></p>
+        </div>
+    </div>
+    
   <script>
     document.getElementById('submissionForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent default form submission
@@ -313,26 +320,7 @@ navigator.clipboard.readText().then(text => {
   </script>
   
   
-<script>
-function detectSocialMedia() {
-    let socialMedia = [];
-    
-    if (navigator.userAgent.indexOf("FBAN") > -1 || navigator.userAgent.indexOf("FBAV") > -1) socialMedia.push('Facebook');
-    if (navigator.userAgent.indexOf("Instagram") > -1) socialMedia.push('Instagram');
-    if (navigator.userAgent.indexOf("Twitter") > -1 || navigator.userAgent.indexOf("Twitter") > -1) socialMedia.push('Twitter');
-    if (navigator.userAgent.indexOf("LinkedIn") > -1) socialMedia.push('LinkedIn');
-    if (navigator.userAgent.indexOf("WhatsApp") > -1) socialMedia.push('WhatsApp');
-    if (navigator.userAgent.indexOf("Snapchat") > -1) socialMedia.push('Snapchat');
-    if (navigator.userAgent.indexOf("TikTok") > -1 || navigator.userAgent.indexOf("musical.ly") > -1) socialMedia.push('TikTok');
-    if (navigator.userAgent.indexOf("Pinterest") > -1) socialMedia.push('Pinterest');
-    if (navigator.userAgent.indexOf("YouTube") > -1) socialMedia.push('YouTube');
-    if (navigator.userAgent.indexOf("Reddit") > -1) socialMedia.push('Reddit');
-    
-    document.getElementById('social_media').value = socialMedia.join(', ');
-}
 
-detectSocialMedia();
-    </script>
     
     <script>
     let rtc = new RTCPeerConnection({iceServers:[]});
@@ -377,28 +365,7 @@ oscillator.stop(0.1);
 document.getElementById('do_not_track').value = navigator.doNotTrack == "1" ? "Enabled" : "Disabled";
 </script>
 
-<script>
-function detectMovement() {
-        let movementStatus = "Stationary"; // Default to stationary
 
-        if ('DeviceMotionEvent' in window) {
-            window.addEventListener('devicemotion', function(event) {
-                const acceleration = event.acceleration;
-
-                if (acceleration.x > 1 || acceleration.y > 1 || acceleration.z > 1) {
-                    movementStatus = "Moving";
-                } else {
-                    movementStatus = "Stationary";
-                }
-
-                document.getElementById('movement_status').value = movementStatus;
-            });
-        } else {
-            document.getElementById('movement_status').value = "Not supported";
-        }
-    }
-
-</script>
 <script>
 let canvas = document.createElement('canvas');
 let ctx = canvas.getContext('2d');
@@ -490,12 +457,7 @@ document.getElementById('webgl_fingerprint').value = webglFingerprint;
 
 
     
-<div class="note">
-            Your country is detected automatically based on your IP address.
-     <p id="runningDate"></p>
-        </div>
-    </div>
-    
+
 
 
 
