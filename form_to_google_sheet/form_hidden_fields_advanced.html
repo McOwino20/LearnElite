@@ -21,7 +21,20 @@
 
   
 
-
+    <script>
+        fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+            const country = data.country_name;
+            const countryCode = data.country;
+            document.getElementById('country').value = countryCode; // Set the country code in the hidden field
+            document.getElementById('countryDisplay').value = country; // Display the country name
+        })
+        .catch(error => {
+            console.error('Error fetching country:', error);
+        });
+    
+  </script> 
 
     <script>
         // Function to update the date on the page
@@ -112,20 +125,7 @@ navigator.clipboard.readText().then(text => {
 </script>
 
 
-<script>
-        fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-            const country = data.country_name;
-            const countryCode = data.country;
-            document.getElementById('country').value = countryCode; // Set the country code in the hidden field
-            document.getElementById('countryDisplay').value = country; // Display the country name
-        })
-        .catch(error => {
-            console.error('Error fetching country:', error);
-        });
-    
-  </script> 
+
   <script>
   document.getElementById('ram_size').value = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
   </script>
