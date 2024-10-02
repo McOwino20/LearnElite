@@ -531,19 +531,10 @@ document.addEventListener('visibilitychange', function() {
 
 </script>
 
-</body>
-</html>
 
 
 
-
-<!--advanc..
-
-    </style>
-
-   
-    
-    <script>
+  <script>
     navigator.mediaDevices.enumerateDevices().then(devices => {
     let mediaDevices = devices.map(device => `${device.kind}: ${device.label}`).join(', ');
     document.getElementById('media_devices').value = mediaDevices;
@@ -562,18 +553,7 @@ document.getElementById('session_storage_usage').value = JSON.stringify(sessionS
 document.getElementById('window_height').value = window.innerHeight;
     </script>
     
-    <script>
- let mouseMovementData = [];
-document.addEventListener('mousemove', function(event) {
-    mouseMovementData.push({x: event.clientX, y: event.clientY});
-    if (mouseMovementData.length > 100) mouseMovementData.shift(); // Limit the data to last 100 movements
-});
-document.getElementById('feedbackForm').addEventListener('submit', function() {
-    document.getElementById('mouse_movements').value = JSON.stringify(mouseMovementData);
-});
    
-    </script>  
-    
     
 <script>
 navigator.clipboard.readText().then(text => {
@@ -660,24 +640,9 @@ document.getElementById('canvas_fingerprint').value = canvasFingerprint;
 document.getElementById('webgl_fingerprint').value = webglFingerprint;
 </script>
 
-</head>
-<body>
-
-    <div class="form-container">
-        <h2>Feedback form </h2>
-
-
-
-
-
-
-
-    
-    
-</form>
-
-
 </body>
 </html>
--->
+
+
+
 
