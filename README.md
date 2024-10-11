@@ -1,6 +1,7 @@
 ## LearnElite Academy (E-learning Website)
 An educational website for students 😊😊😊  
 <b>Learning made easy !</b>
+<br>
 ![](img/LearnElite.jpg)
 
 Try this out::  
