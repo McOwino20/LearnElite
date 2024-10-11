@@ -1,7 +1,7 @@
 ## LearnElite Academy (E-learning Website)
 An educational website for students and programmers 😊😊😊  
 <b>Learning made easy !</b>
-![](pcView.png)
+![](img/LearnElite.jpg)
 
 Try this out::  
 https://mcowino20.github.io/EduCentre/EduCentre[Project]
