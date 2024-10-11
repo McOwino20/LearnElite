@@ -4,7 +4,7 @@ An educational website for students 😊😊😊
 <br>
 ![](img/LearnElite.jpg)
 
-Try this out::  
+Try this out:: 
 https://www.isa9.xyz.
 <br>
 Our Educational Website would provide all the education related stuffs:  
