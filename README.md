@@ -4,8 +4,7 @@ An educational website for students and programmers 😊😊😊
 ![](img/LearnElite.jpg)
 
 Try this out::  
-https://mcowino20.github.io/EduCentre/EduCentre[Project]
-
+https://www.isa9.xyz
 Our Educational Website would provide all the education related stuffs:  
 Notes, Sample Papers, Online Video Lectures and courses to crack competitive  
 exams like JEE-Main, JEE-Advanced, GATE, etc. Students can clear their doubts  
