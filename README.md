@@ -10,7 +10,6 @@ https://www.isa9.xyz.
 Our Educational Website would provide all the education related stuffs:  
 Notes, Sample Papers, Online Video Lectures and courses to crack competitive  
 exams like K.C.S.E etc. 
-
 <br>
 ✔ We have made this website as responsive website so, students or users can  
    easily access our website from  any device.  
