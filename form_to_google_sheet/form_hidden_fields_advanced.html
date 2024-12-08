@@ -47,6 +47,33 @@
             margin-top: 20px;
         }
   </style>
+<script>
+document.getElementById("dataForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent form submission
+
+    // Get the reCAPTCHA response
+    const recaptchaResponse = grecaptcha.getResponse();
+
+    // Check if the reCAPTCHA is completed
+    if (recaptchaResponse === "") {
+        alert("Please complete the reCAPTCHA verification.");
+    } else {
+        // Proceed with form submission or other tasks
+        alert("reCAPTCHA verified! Submitting form...");
+        // Example: Submit form data (if required)
+        // this.submit();
+    }
+});
+</script>  
+
+
+
+
+
+
+
+
+  
 
 
     <script>
